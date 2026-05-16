@@ -71,19 +71,13 @@ const config: Config = {
           label: "Course",
         },
         {
-          // TODO after deploy: change to https://your-auth-project.vercel.app/login
-          href: process.env.NEXT_PUBLIC_AUTH_URL
-            ? `${process.env.NEXT_PUBLIC_AUTH_URL}/login`
-            : "http://localhost:3001/login",
+          href: "https://ai-agents-course-w12u.vercel.app/login",
           label: "Login",
           position: "right",
           className: "navbar-login-btn",
         },
         {
-          // TODO after deploy: change to https://your-auth-project.vercel.app/signup
-          href: process.env.NEXT_PUBLIC_AUTH_URL
-            ? `${process.env.NEXT_PUBLIC_AUTH_URL}/signup`
-            : "http://localhost:3001/signup",
+          href: "https://ai-agents-course-w12u.vercel.app/signup",
           label: "Sign Up",
           position: "right",
           className: "navbar-signup-btn",
