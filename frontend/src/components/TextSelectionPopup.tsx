@@ -4,7 +4,7 @@ import styles from "./TextSelectionPopup.module.css";
 // TODO: Replace with your Cloud Run URL after deployment
 const RAG_API =
   typeof window !== "undefined" && window.location.hostname !== "localhost"
-    ? "https://YOUR-CLOUD-RUN-URL.a.run.app"
+    ? "https://ai-agents-rag-127978308986.asia-south1.run.app"
     : "http://localhost:8001";
 
 interface PopupState {
