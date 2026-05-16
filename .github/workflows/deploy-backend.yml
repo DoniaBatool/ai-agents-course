@@ -3,9 +3,6 @@ name: Deploy RAG Backend → Google Cloud Run
 on:
   push:
     branches: [main]
-    paths:
-      - "rag-agent/**"
-      - ".github/workflows/deploy-backend.yml"
 
 env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
