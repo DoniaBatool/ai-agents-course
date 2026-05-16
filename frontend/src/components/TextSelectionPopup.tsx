@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import styles from "./TextSelectionPopup.module.css";
 
+// TODO: Replace with your Cloud Run URL after deployment
 const RAG_API =
   typeof window !== "undefined" && window.location.hostname !== "localhost"
-    ? process.env.NEXT_PUBLIC_RAG_API_URL ?? "https://YOUR-CLOUD-RUN-URL.a.run.app"
+    ? "https://YOUR-CLOUD-RUN-URL.a.run.app"
     : "http://localhost:8001";
 
 interface PopupState {
