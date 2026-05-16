@@ -1,0 +1,105 @@
+/* ── Layout ─────────────────────────────────────────────────────────────────── */
+.main {
+  background: #000;
+  color: #e2e8f0;
+  font-family: "Inter", system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ── Hero section ────────────────────────────────────────────────────────────── */
+.heroSection {
+  width: 100%;
+}
+
+/* fade-in on mount */
+.fadeIn  { opacity: 1; transform: translateY(0);   transition: opacity 0.7s ease, transform 0.7s ease; }
+.fadeOut { opacity: 0; transform: translateY(20px); }
+
+/* Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  font-size: 0.78rem;
+  color: #a5b4fc;
+  letter-spacing: 0.04em;
+}
+
+.badgeDot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #6366f1;
+  box-shadow: 0 0 8px #6366f1;
+  animation: pulseDot 2s ease-in-out infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { box-shadow: 0 0 8px #6366f1; }
+  50%       { box-shadow: 0 0 18px #818cf8, 0 0 30px #6366f1; }
+}
+
+/* ── Orbital section ─────────────────────────────────────────────────────────── */
+.orbitalSection {
+  position: relative;
+  background: #000;
+  overflow: hidden;
+}
+
+.orbitalLabel {
+  position: absolute;
+  top: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 10;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.orbitalTitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin: 0 0 6px;
+  letter-spacing: -0.01em;
+}
+
+.orbitalHint {
+  font-size: 0.78rem;
+  color: #475569;
+  margin: 0;
+}
+
+/* ── Tech stack pills ───────────────────────────────────────────────────────── */
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  padding: 48px 24px 64px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.pill {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #94a3b8;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  background: rgba(99, 102, 241, 0.06);
+  transition: border-color 0.2s, color 0.2s;
+  cursor: default;
+}
+
+.pill:hover {
+  border-color: rgba(99, 102, 241, 0.6);
+  color: #c7d2fe;
+}

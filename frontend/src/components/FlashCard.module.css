@@ -1,0 +1,167 @@
+.deck {
+  margin: 2rem 0;
+  border-radius: 16px;
+  border: 1px solid rgba(99,102,241,0.25);
+  background: rgba(15,12,30,0.8);
+  overflow: hidden;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(99,102,241,0.15);
+}
+.headerLeft { display: flex; align-items: center; gap: 8px; }
+.icon { font-size: 1.2rem; }
+.title { font-size: 0.9rem; font-weight: 700; color: #a5b4fc; letter-spacing: 0.04em; text-transform: uppercase; }
+.progress { display: flex; align-items: center; gap: 10px; }
+.progressText { font-size: 0.8rem; color: #64748b; font-variant-numeric: tabular-nums; }
+.masteredBadge {
+  font-size: 0.72rem; font-weight: 600; padding: 2px 8px;
+  border-radius: 999px; background: rgba(34,197,94,0.15);
+  border: 1px solid rgba(34,197,94,0.3); color: #4ade80;
+}
+
+/* Progress bar */
+.progressBar { display: flex; gap: 3px; padding: 0 20px 0; height: 4px; }
+.progressSegment {
+  flex: 1; border-radius: 2px;
+  background: rgba(99,102,241,0.12);
+  transition: background 0.3s;
+}
+.segmentActive  { background: #6366f1; }
+.segmentDone    { background: rgba(99,102,241,0.4); }
+.segmentMastered{ background: #22c55e; }
+
+/* Card flip */
+.cardWrapper {
+  padding: 24px 20px;
+  cursor: pointer;
+  perspective: 1000px;
+  min-height: 220px;
+}
+.card {
+  position: relative;
+  width: 100%;
+  min-height: 180px;
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.cardFlipped { transform: rotateY(180deg); }
+
+.cardFront,
+.cardBack {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 32px;
+  gap: 12px;
+  text-align: center;
+}
+.cardFront {
+  background: linear-gradient(135deg, rgba(99,102,241,0.12) 0%, rgba(139,92,246,0.08) 100%);
+  border: 1px solid rgba(99,102,241,0.3);
+}
+.cardBack {
+  background: linear-gradient(135deg, rgba(34,197,94,0.1) 0%, rgba(16,185,129,0.06) 100%);
+  border: 1px solid rgba(34,197,94,0.25);
+  transform: rotateY(180deg);
+}
+
+.sideLabel {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #64748b;
+  text-transform: uppercase;
+}
+.cardFront .sideLabel { color: #818cf8; }
+.cardBack  .sideLabel { color: #4ade80; }
+
+.cardText {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #e2e8f0;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.flipHint {
+  font-size: 0.72rem;
+  color: #475569;
+  margin-top: 4px;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px 16px;
+  gap: 12px;
+}
+.navBtn {
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: 1px solid rgba(99,102,241,0.3);
+  background: rgba(99,102,241,0.08);
+  color: #a5b4fc;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.navBtn:hover { background: rgba(99,102,241,0.18); border-color: rgba(99,102,241,0.6); }
+
+.masterBtn {
+  flex: 1;
+  max-width: 200px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(99,102,241,0.3);
+  background: transparent;
+  color: #94a3b8;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.masterBtnActive {
+  border-color: rgba(34,197,94,0.5);
+  background: rgba(34,197,94,0.1);
+  color: #4ade80;
+}
+.masterBtn:hover { border-color: rgba(34,197,94,0.4); color: #4ade80; }
+
+/* Completion */
+.complete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 14px 20px;
+  background: rgba(34,197,94,0.08);
+  border-top: 1px solid rgba(34,197,94,0.2);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #4ade80;
+}
+.resetBtn {
+  padding: 5px 14px;
+  border-radius: 6px;
+  border: 1px solid rgba(34,197,94,0.3);
+  background: transparent;
+  color: #4ade80;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.resetBtn:hover { background: rgba(34,197,94,0.12); }

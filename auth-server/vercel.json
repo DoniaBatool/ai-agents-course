@@ -1,0 +1,13 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "env": {
+    "BETTER_AUTH_URL": "@better_auth_url",
+    "BETTER_AUTH_SECRET": "@better_auth_secret",
+    "DATABASE_URL": "@database_url",
+    "ALLOWED_ORIGINS": "@allowed_origins",
+    "NEXT_PUBLIC_FRONTEND_URL": "@next_public_frontend_url",
+    "NEXT_PUBLIC_AUTH_URL": "@next_public_auth_url"
+  }
+}

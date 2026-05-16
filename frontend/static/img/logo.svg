@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <defs>
+    <linearGradient id="headGrad" x1="30%" y1="100%" x2="70%" y2="0%">
+      <stop offset="0%"   stop-color="#f472b6"/>
+      <stop offset="45%"  stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#38bdf8"/>
+    </linearGradient>
+    <linearGradient id="bubbleGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#c084fc"/>
+      <stop offset="100%" stop-color="#60a5fa"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Head profile — side view of a woman facing left -->
+  <path
+    d="
+      M 118 18
+      C 94 12, 62 24, 52 52
+      C 44 74, 48 96, 52 112
+      C 56 126, 56 138, 52 152
+      C 48 164, 46 174, 58 180
+      C 68 185, 80 182, 86 175
+      C 90 170, 90 162, 88 155
+      L 88 148
+      C 96 154, 108 154, 114 146
+      C 120 138, 118 126, 114 118
+      L 112 110
+      C 128 104, 142 90, 148 72
+      C 154 54, 148 32, 134 22
+      C 128 18, 122 16, 118 18
+      Z
+    "
+    stroke="url(#headGrad)"
+    stroke-width="5.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <!-- Chat bubble outline -->
+  <rect
+    x="62" y="58"
+    width="68" height="48"
+    rx="14" ry="14"
+    stroke="url(#bubbleGrad)"
+    stroke-width="5"
+  />
+  <!-- Bubble tail pointing down -->
+  <path
+    d="M 74 106 L 64 122 L 84 106"
+    stroke="url(#bubbleGrad)"
+    stroke-width="5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"
+  />
+
+  <!-- Three dots -->
+  <circle cx="78"  cy="82" r="5" fill="url(#bubbleGrad)"/>
+  <circle cx="96"  cy="82" r="5" fill="url(#bubbleGrad)"/>
+  <circle cx="114" cy="82" r="5" fill="url(#bubbleGrad)"/>
+</svg>

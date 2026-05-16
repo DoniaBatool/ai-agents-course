@@ -1,0 +1,153 @@
+/* Tailwind utilities (no preflight to avoid Docusaurus conflicts) */
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * AI Agents Course — Custom Styles
+ */
+
+/* shadcn/ui CSS variables */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --primary: 221.2 83.2% 53.3%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 221.2 83.2% 53.3%;
+  --radius: 0.5rem;
+}
+
+[data-theme="dark"] {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+  --primary: 217.2 91.2% 59.8%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 224.3 76.3% 48%;
+}
+
+/* ── Navbar Login / Sign Up buttons ─────────────────────────────────────── */
+.navbar-login-btn {
+  color: #a855f7 !important;
+  font-weight: 600 !important;
+  border: 1.5px solid rgba(168, 85, 247, 0.4);
+  border-radius: 8px;
+  padding: 6px 16px !important;
+  margin-left: 4px;
+  transition: all 0.2s ease;
+}
+.navbar-login-btn:hover {
+  color: #fff !important;
+  background: rgba(168, 85, 247, 0.15);
+  border-color: #a855f7;
+  text-decoration: none;
+}
+
+.navbar-signup-btn {
+  color: #fff !important;
+  font-weight: 600 !important;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  border-radius: 8px;
+  padding: 6px 16px !important;
+  margin-left: 6px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.4);
+}
+.navbar-signup-btn:hover {
+  background: linear-gradient(135deg, #a855f7, #7c3aed, #6d28d9);
+  box-shadow: 0 6px 20px rgba(168, 85, 247, 0.55);
+  transform: translateY(-1px);
+  text-decoration: none;
+  color: #fff !important;
+}
+
+/* ── Navbar "Course" link — purple on hover ─────────────────────────────── */
+.navbar__item.navbar__link:hover,
+.navbar__item.navbar__link--active {
+  color: #a855f7 !important;
+}
+
+/* ── Navbar title — purple gradient on hover ────────────────────────────── */
+.navbar__brand:hover .navbar__title,
+.navbar__brand:focus .navbar__title {
+  background: linear-gradient(90deg, #818cf8, #a855f7, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all 0.25s ease;
+}
+.navbar__title {
+  transition: all 0.25s ease;
+}
+
+/* ── Homepage CTA button — brighter purple on hover ─────────────────────── */
+.hero-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 700;
+  color: #ffffff;
+  text-decoration: none;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  box-shadow: 0 8px 30px rgba(124, 58, 237, 0.35);
+  transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.15s ease;
+}
+.hero-cta-btn:hover {
+  background: linear-gradient(135deg, #a855f7, #7c3aed, #6d28d9);
+  box-shadow: 0 12px 40px rgba(168, 85, 247, 0.55);
+  transform: translateY(-2px);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* ── Hide dark-mode toggle on homepage only ─────────────────────────────── */
+[data-page="home"] [class*="colorModeToggle"],
+[data-page="home"] button[title*="Switch between dark and light mode"],
+[data-page="home"] button[title*="dark mode"],
+[data-page="home"] button[title*="light mode"] {
+  display: none !important;
+}
+
+:root {
+  --ifm-color-primary: #2563eb;
+  --ifm-color-primary-dark: #1d4ed8;
+  --ifm-color-primary-darker: #1e40af;
+  --ifm-color-primary-darkest: #1e3a8a;
+  --ifm-color-primary-light: #3b82f6;
+  --ifm-color-primary-lighter: #60a5fa;
+  --ifm-color-primary-lightest: #93c5fd;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+  --ifm-color-primary: #60a5fa;
+  --ifm-color-primary-dark: #3b82f6;
+  --ifm-color-primary-darker: #2563eb;
+  --ifm-color-primary-darkest: #1d4ed8;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
