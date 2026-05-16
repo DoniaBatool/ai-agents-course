@@ -261,7 +261,8 @@ export default function RadialOrbitalTimeline({
                         <div className="mt-4 pt-3 border-t border-white/10">
                           <button
                             onClick={(e) => { e.stopPropagation(); navigate(item.href!); }}
-                            className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-md text-xs font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 transition-all"
+                            style={{ background: "linear-gradient(to right, #4f46e5, #9333ea)", color: "#ffffff" }}
+                            className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-md text-xs font-semibold transition-all"
                           >
                             Start Module <ArrowRight size={12} />
                           </button>
