@@ -62,17 +62,14 @@ export default function SignupPage() {
     setError("");
     setLoading(true);
     try {
-      const result = await authClient.signUp.email({
-        name,
-        email,
-        password,
-        callbackURL: process.env.NEXT_PUBLIC_FRONTEND_URL ?? "http://localhost:3000",
-      });
+      const result = await authClient.signUp.email({ name, email, password });
       if (result.error) {
         setError(result.error.message ?? "Signup failed.");
         return;
       }
-      setStep(2);
+      // Redirect to frontend with auth=1 so course pages unlock
+      const frontendUrl = process.env.NEXT_PUBLIC_FRONTEND_URL ?? "http://localhost:3000";
+      window.location.href = `${frontendUrl}?auth=1`;
     } catch {
       setError("Something went wrong. Please try again.");
     } finally {

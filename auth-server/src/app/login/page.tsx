@@ -37,13 +37,17 @@ export default function LoginPage() {
     setError("");
     setLoading(true);
     try {
-      const result = await authClient.signIn.email({
-        email,
-        password,
-        callbackURL: process.env.NEXT_PUBLIC_FRONTEND_URL ?? "http://localhost:3000",
-      });
+      const result = await authClient.signIn.email({ email, password });
       if (result.error) {
         setError(result.error.message ?? "Login failed. Please check your credentials.");
+      } else {
+        // Redirect back to frontend with auth=1 flag
+        const params = new URLSearchParams(window.location.search);
+        const redirect = params.get("redirect");
+        const frontendUrl = process.env.NEXT_PUBLIC_FRONTEND_URL ?? "http://localhost:3000";
+        const target = redirect ?? frontendUrl;
+        const separator = target.includes("?") ? "&" : "?";
+        window.location.href = `${target}${separator}auth=1`;
       }
     } catch {
       setError("Something went wrong. Please try again.");

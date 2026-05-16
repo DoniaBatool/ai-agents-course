@@ -124,6 +124,21 @@
   text-decoration: none;
 }
 
+/* ── Navbar black on homepage ───────────────────────────────────────────── */
+[data-page="home"] .navbar {
+  background: #000 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+[data-page="home"] .navbar__title {
+  color: #fff !important;
+}
+[data-page="home"] .navbar__link {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+[data-page="home"] .navbar__link:hover {
+  color: #a855f7 !important;
+}
+
 /* ── Hide dark-mode toggle on homepage only ─────────────────────────────── */
 [data-page="home"] [class*="colorModeToggle"],
 [data-page="home"] button[title*="Switch between dark and light mode"],
