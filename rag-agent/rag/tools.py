@@ -26,6 +26,31 @@ def get_qdrant():
 
 COLLECTION = os.getenv("QDRANT_COLLECTION", "ai-agents-course")
 
+def search_course_content_raw(query: str) -> str:
+    """Search course content — plain function, no decorator."""
+    try:
+        embedding = get_openai().embeddings.create(
+            model="text-embedding-3-small",
+            input=query
+        ).data[0].embedding
+
+        results = get_qdrant().search(
+            collection_name=os.getenv("QDRANT_COLLECTION", "ai-agents-course"),
+            query_vector=embedding,
+            limit=3
+        )
+
+        if not results:
+            return "No relevant content found."
+
+        return "\n\n---\n\n".join([
+            f"**{r.payload.get('title', 'Section')}**\n{r.payload.get('content', '')}"
+            for r in results
+        ])
+    except Exception as e:
+        return f"Search unavailable: {str(e)}. Answer from training knowledge."
+
+
 @function_tool
 def search_course_content(query: str) -> str:
     """Search the AI Agents course content for relevant information."""
