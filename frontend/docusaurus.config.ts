@@ -86,6 +86,24 @@ const config: Config = {
     },
     footer: {
       style: "dark",
+      links: [
+        {
+          title: "Legal",
+          items: [
+            { label: "Terms of Service", to: "/terms" },
+            { label: "Privacy Policy", to: "/privacy" },
+            { label: "Refund Policy", to: "/refund" },
+          ],
+        },
+        {
+          title: "Course",
+          items: [
+            { label: "Pricing", to: "/pricing" },
+            { label: "Sign Up", href: "https://ai-agents-course-w12u.vercel.app/signup" },
+            { label: "Login", href: "https://ai-agents-course-w12u.vercel.app/login" },
+          ],
+        },
+      ],
       copyright: `Copyright © ${new Date().getFullYear()} AI Agents Course`,
     },
     prism: {
