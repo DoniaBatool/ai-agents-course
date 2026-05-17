@@ -1,0 +1,44 @@
+.main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+}
+
+.main h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 0.25rem;
+  background: linear-gradient(135deg, #818cf8, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.updated {
+  font-size: 0.85rem;
+  opacity: 0.5;
+  margin-bottom: 2rem;
+}
+
+.main h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  color: #a78bfa;
+}
+
+.main p,
+.main li {
+  font-size: 0.97rem;
+  line-height: 1.75;
+  opacity: 0.85;
+}
+
+.main ul {
+  padding-left: 1.5rem;
+}
+
+.main a {
+  color: #a78bfa;
+}
