@@ -33,7 +33,7 @@ export default function Pricing() {
             </ul>
 
             <a
-              href="/signup"
+              href="https://ai-agents-course-w12u.vercel.app/signup"
               className={styles.ctaButton}
             >
               Start Learning Today
