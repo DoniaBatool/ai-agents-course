@@ -95,30 +95,23 @@ async def translate(request: TranslateRequest):
 
 @app.post("/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest):
-    """Send a message to the AI course tutor (RAG-powered)."""
+    """Send a message to the AI course tutor (RAG-powered via OpenAI Agents SDK)."""
     try:
-        from rag.tools import search_course_content_raw
-
-        # 1. Search course content
-        context = search_course_content_raw(request.message)
-
-        # 2. Call OpenAI directly with context
-        result = await openai_client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[
-                {
-                    "role": "system",
-                    "content": """You are an expert AI tutor for the AI Agents Development Course.
-Use the provided course content to answer questions accurately.
-Give clear, practical explanations with code examples when relevant.
-Answer in the same language the student uses (English or Urdu)."""
-                },
-                {
-                    "role": "user",
-                    "content": f"Course content:\n{context}\n\nQuestion: {request.message}"
-                },
-            ],
-        )
-        return ChatResponse(response=result.choices[0].message.content)
+        # Use OpenAI Agents SDK — agent uses search_course_content tool internally
+        result = await Runner.run(course_agent, request.message)
+        return ChatResponse(response=result.final_output)
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        # Fallback: direct OpenAI with manual RAG if agents SDK fails
+        try:
+            from rag.tools import search_course_content_raw
+            context = search_course_content_raw(request.message)
+            fallback = await openai_client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[
+                    {"role": "system", "content": "You are an expert AI tutor for the AI Agents Development Course. Use the provided course content to answer accurately. Answer in the same language the student uses."},
+                    {"role": "user", "content": f"Course content:\n{context}\n\nQuestion: {request.message}"},
+                ],
+            )
+            return ChatResponse(response=fallback.choices[0].message.content)
+        except Exception as e2:
+            raise HTTPException(status_code=500, detail=f"Primary: {str(e)} | Fallback: {str(e2)}")
