@@ -63,48 +63,6 @@ def health():
     return {"status": "healthy"}
 
 
-@app.post("/debug/chat")
-async def debug_chat(request: ChatRequest):
-    """Debug: shows whether Agents SDK or fallback was used."""
-    try:
-        result = await Runner.run(course_agent, request.message)
-        return {
-            "method": "✅ OpenAI Agents SDK",
-            "response": result.final_output[:200],
-        }
-    except Exception as e:
-        try:
-            from rag.tools import search_course_content_raw
-            context = search_course_content_raw(request.message)
-            fallback = await openai_client.chat.completions.create(
-                model="gpt-4o-mini",
-                messages=[
-                    {"role": "system", "content": "You are an AI tutor. Answer using the course content."},
-                    {"role": "user", "content": f"Course content:\n{context}\n\nQuestion: {request.message}"},
-                ],
-            )
-            return {
-                "method": "⚠️ Fallback (direct OpenAI)",
-                "sdk_error": str(e),
-                "response": fallback.choices[0].message.content[:200],
-            }
-        except Exception as e2:
-            return {"method": "❌ Both failed", "error1": str(e), "error2": str(e2)}
-
-
-@app.get("/debug/search")
-async def debug_search():
-    """Debug: test Qdrant connection directly."""
-    import os
-    from rag.tools import search_course_content_raw
-    result = search_course_content_raw("what is an AI agent")
-    return {
-        "result": result[:300],
-        "qdrant_url_set": bool(os.getenv("QDRANT_URL")),
-        "qdrant_key_set": bool(os.getenv("QDRANT_API_KEY")),
-        "openai_key_set": bool(os.getenv("OPENAI_API_KEY")),
-    }
-
 
 @app.post("/translate", response_model=TranslateResponse)
 async def translate(request: TranslateRequest):
