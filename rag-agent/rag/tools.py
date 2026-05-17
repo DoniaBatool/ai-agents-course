@@ -26,6 +26,26 @@ def get_qdrant():
 
 COLLECTION = os.getenv("QDRANT_COLLECTION", "ai-agents-course")
 
+def _qdrant_search(query_embedding: list, limit: int = 3) -> list:
+    """Search Qdrant using the correct API for qdrant-client 1.7+"""
+    collection = os.getenv("QDRANT_COLLECTION", "ai-agents-course")
+    try:
+        # qdrant-client >= 1.7: use query_points()
+        response = get_qdrant().query_points(
+            collection_name=collection,
+            query=query_embedding,
+            limit=limit,
+        )
+        return response.points
+    except AttributeError:
+        # Fallback for older versions
+        return get_qdrant().search(
+            collection_name=collection,
+            query_vector=query_embedding,
+            limit=limit,
+        )
+
+
 def search_course_content_raw(query: str) -> str:
     """Search course content — plain function, no decorator."""
     try:
@@ -34,11 +54,7 @@ def search_course_content_raw(query: str) -> str:
             input=query
         ).data[0].embedding
 
-        results = get_qdrant().search(
-            collection_name=os.getenv("QDRANT_COLLECTION", "ai-agents-course"),
-            query_vector=embedding,
-            limit=3
-        )
+        results = _qdrant_search(embedding)
 
         if not results:
             return "No relevant content found."
@@ -55,28 +71,19 @@ def search_course_content_raw(query: str) -> str:
 def search_course_content(query: str) -> str:
     """Search the AI Agents course content for relevant information."""
     try:
-        # Create embedding for the query
         embedding = get_openai().embeddings.create(
             model="text-embedding-3-small",
             input=query
         ).data[0].embedding
 
-        # Search Qdrant
-        results = get_qdrant().search(
-            collection_name=os.getenv("QDRANT_COLLECTION", "ai-agents-course"),
-            query_vector=embedding,
-            limit=3
-        )
+        results = _qdrant_search(embedding)
 
         if not results:
             return "No relevant content found in the course materials."
 
-        context = "\n\n---\n\n".join([
+        return "\n\n---\n\n".join([
             f"**{r.payload.get('title', 'Section')}**\n{r.payload.get('content', '')}"
             for r in results
         ])
-        return context
-
     except Exception as e:
-        # Return error as string so agent can handle it gracefully
         return f"Search unavailable: {str(e)}. Answer from your training knowledge instead."
