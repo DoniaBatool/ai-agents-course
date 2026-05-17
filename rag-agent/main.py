@@ -63,6 +63,20 @@ def health():
     return {"status": "healthy"}
 
 
+@app.get("/debug/search")
+async def debug_search():
+    """Debug: test Qdrant connection directly."""
+    import os
+    from rag.tools import search_course_content_raw
+    result = search_course_content_raw("what is an AI agent")
+    return {
+        "result": result[:300],
+        "qdrant_url_set": bool(os.getenv("QDRANT_URL")),
+        "qdrant_key_set": bool(os.getenv("QDRANT_API_KEY")),
+        "openai_key_set": bool(os.getenv("OPENAI_API_KEY")),
+    }
+
+
 @app.post("/translate", response_model=TranslateResponse)
 async def translate(request: TranslateRequest):
     """Translate any text to Urdu using GPT-4o-mini."""
