@@ -29,7 +29,7 @@ export default function Pricing() {
               <li>✅ Urdu & English support</li>
               <li>✅ Real-world projects & code examples</li>
               <li>✅ New content as it's added</li>
-              <li>✅ 7-day money-back guarantee</li>
+              <li>✅ Build & monetize your own AI products</li>
             </ul>
 
             <a
@@ -39,7 +39,7 @@ export default function Pricing() {
               Start Learning Today
             </a>
 
-            <p className={styles.guarantee}>🔒 7-day money-back guarantee — no questions asked</p>
+            <p className={styles.guarantee}>🚀 This course is so practical, students build and launch their own AI products</p>
           </div>
         </div>
 
@@ -52,8 +52,8 @@ export default function Pricing() {
           </div>
 
           <div className={styles.faqItem}>
-            <h3>Is there a refund policy?</h3>
-            <p>Absolutely. If you're not satisfied within the first 7 days, we'll give you a full refund — no questions asked.</p>
+            <h3>What will I be able to build after this course?</h3>
+            <p>You will be able to build fully deployed AI Agent applications — and even create your own AI-powered course or product to monetize, just like this one.</p>
           </div>
 
           <div className={styles.faqItem}>
