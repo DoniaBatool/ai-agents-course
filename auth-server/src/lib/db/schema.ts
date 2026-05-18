@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, boolean } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, boolean, integer, unique } from "drizzle-orm/pg-core";
 
 // ── Better Auth required tables ────────────────────────────────────────────────
 
@@ -18,6 +18,9 @@ export const user = pgTable("user", {
   isPaid:                boolean("is_paid").notNull().default(false),
   paddleCustomerId:      text("paddle_customer_id"),
   paddleSubscriptionId:  text("paddle_subscription_id"),
+  // Course completion fields
+  completedAt:           timestamp("completed_at"),
+  certificateId:         text("certificate_id"),
 });
 
 export const session = pgTable("session", {
@@ -46,6 +49,16 @@ export const account = pgTable("account", {
   createdAt:              timestamp("created_at").notNull().defaultNow(),
   updatedAt:              timestamp("updated_at").notNull().defaultNow(),
 });
+
+// ── Course progress tracking ───────────────────────────────────────────────────
+export const userProgress = pgTable("user_progress", {
+  id:          text("id").primaryKey(),
+  userId:      text("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
+  lessonId:    text("lesson_id").notNull(),   // e.g. "module-1/lesson-1"
+  completedAt: timestamp("completed_at").notNull().defaultNow(),
+}, (t) => ({
+  uniq: unique().on(t.userId, t.lessonId),    // each lesson counted once per user
+}));
 
 export const verification = pgTable("verification", {
   id:         text("id").primaryKey(),
