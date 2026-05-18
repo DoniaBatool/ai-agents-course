@@ -1,11 +1,27 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { user, userProgress } from "@/lib/db/schema";
+import { user, userProgress, session } from "@/lib/db/schema";
 import { eq, count } from "drizzle-orm";
 import { sendCertificateEmail } from "@/lib/email";
 
 const FRONTEND_ORIGIN = process.env.NEXT_PUBLIC_FRONTEND_URL ?? "http://localhost:3000";
+
+// Verify Bearer token against DB sessions table → returns userId or null
+async function getUserIdFromToken(req: NextRequest): Promise<string | null> {
+  const authHeader = req.headers.get("Authorization") ?? "";
+  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7).trim() : null;
+  if (!token) return null;
+
+  const [row] = await db
+    .select({ userId: session.userId, expiresAt: session.expiresAt })
+    .from(session)
+    .where(eq(session.token, token));
+
+  if (!row) return null;
+  if (new Date(row.expiresAt) < new Date()) return null; // expired
+
+  return row.userId;
+}
 
 function corsHeaders() {
   return {
@@ -29,9 +45,8 @@ const TOTAL_LESSONS = 17;
 // Called from frontend when student clicks "Mark as Complete" on a lesson
 // Body: { lessonId: "module-1/lesson-1" }
 export async function POST(req: NextRequest) {
-  // Verify session
-  const session = await auth.api.getSession({ headers: req.headers });
-  if (!session?.user) {
+  const userId = await getUserIdFromToken(req);
+  if (!userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401, headers: corsHeaders() });
   }
 
@@ -41,8 +56,6 @@ export async function POST(req: NextRequest) {
   if (!lessonId) {
     return NextResponse.json({ error: "lessonId is required" }, { status: 400, headers: corsHeaders() });
   }
-
-  const userId = session.user.id;
 
   // Insert progress record (ignore duplicates — unique constraint handles it)
   try {
@@ -111,12 +124,10 @@ export async function POST(req: NextRequest) {
 // ── GET /api/progress ──────────────────────────────────────────────────────────
 // Returns user's completed lesson IDs + overall progress
 export async function GET(req: NextRequest) {
-  const session = await auth.api.getSession({ headers: req.headers });
-  if (!session?.user) {
+  const userId = await getUserIdFromToken(req);
+  if (!userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401, headers: corsHeaders() });
   }
-
-  const userId = session.user.id;
 
   const lessons = await db
     .select({ lessonId: userProgress.lessonId })

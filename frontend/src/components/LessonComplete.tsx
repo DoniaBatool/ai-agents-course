@@ -25,11 +25,14 @@ export default function LessonComplete({ lessonId }: Props) {
   async function markComplete() {
     setStatus("loading");
     try {
+      const token = localStorage.getItem("ai_course_token") ?? "";
       const res = await fetch(`${AUTH_URL}/api/progress`, {
-        method:      "POST",
-        credentials: "include",  // sends auth cookie
-        headers:     { "Content-Type": "application/json" },
-        body:        JSON.stringify({ lessonId }),
+        method:  "POST",
+        headers: {
+          "Content-Type":  "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({ lessonId }),
       });
 
       if (res.status === 401) {

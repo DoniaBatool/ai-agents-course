@@ -5,6 +5,7 @@ import { useLocation } from "@docusaurus/router";
 const AUTH_SERVER = "https://ai-agents-course-w12u.vercel.app";
 const STORAGE_KEY = "ai_course_auth";
 const NAME_KEY    = "ai_course_user_name";
+const TOKEN_KEY   = "ai_course_token";
 
 // ── Inject user initials into navbar ──────────────────────────────────────────
 function injectNavbarUser(name: string) {
@@ -54,6 +55,7 @@ function injectNavbarUser(name: string) {
   logout.onclick = () => {
     localStorage.removeItem(STORAGE_KEY);
     localStorage.removeItem(NAME_KEY);
+    localStorage.removeItem(TOKEN_KEY);
     window.location.href = "/";
   };
 
@@ -83,6 +85,8 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
       localStorage.setItem(STORAGE_KEY, "1");
       const name = params.get("name");
       if (name) localStorage.setItem(NAME_KEY, decodeURIComponent(name));
+      const token = params.get("token");
+      if (token) localStorage.setItem(TOKEN_KEY, decodeURIComponent(token));
       window.history.replaceState({}, "", window.location.pathname);
     }
 

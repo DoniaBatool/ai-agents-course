@@ -48,7 +48,8 @@ export default function LoginPage() {
         const target = redirect ?? frontendUrl;
         const separator = target.includes("?") ? "&" : "?";
         const userName = encodeURIComponent((result.data as any)?.user?.name ?? "");
-        window.location.href = `${target}${separator}auth=1&name=${userName}`;
+        const token    = encodeURIComponent((result.data as any)?.session?.token ?? "");
+        window.location.href = `${target}${separator}auth=1&name=${userName}&token=${token}`;
       }
     } catch {
       setError("Something went wrong. Please try again.");
