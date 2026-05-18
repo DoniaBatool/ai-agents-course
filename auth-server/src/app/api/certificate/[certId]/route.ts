@@ -6,9 +6,9 @@ import { eq } from "drizzle-orm";
 // Public endpoint — no auth needed (certificate is public to share)
 export async function GET(
   _req: NextRequest,
-  { params }: { params: { certId: string } }
+  { params }: { params: Promise<{ certId: string }> }
 ) {
-  const { certId } = params;
+  const { certId } = await params;
 
   const [found] = await db
     .select({ name: user.name, certificateId: user.certificateId, completedAt: user.completedAt })
