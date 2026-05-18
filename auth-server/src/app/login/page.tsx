@@ -41,13 +41,14 @@ export default function LoginPage() {
       if (result.error) {
         setError(result.error.message ?? "Login failed. Please check your credentials.");
       } else {
-        // Redirect back to frontend with auth=1 flag
+        // Redirect back to frontend with auth=1 + user name
         const params = new URLSearchParams(window.location.search);
         const redirect = params.get("redirect");
         const frontendUrl = process.env.NEXT_PUBLIC_FRONTEND_URL ?? "http://localhost:3000";
         const target = redirect ?? frontendUrl;
         const separator = target.includes("?") ? "&" : "?";
-        window.location.href = `${target}${separator}auth=1`;
+        const userName = encodeURIComponent((result.data as any)?.user?.name ?? "");
+        window.location.href = `${target}${separator}auth=1&name=${userName}`;
       }
     } catch {
       setError("Something went wrong. Please try again.");
