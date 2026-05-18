@@ -4,6 +4,7 @@ sidebar_position: 4
 
 import FlashCardDeck from '@site/src/components/FlashCard';
 import Quiz from '@site/src/components/Quiz';
+import LessonComplete from '@site/src/components/LessonComplete';
 
 # Streaming Responses
 
@@ -442,3 +443,5 @@ async for event in result.stream_events():
   { question: "When is streaming NOT recommended?", options: ["For chat interfaces", "For batch processing where you need the full output before acting", "For long text generation", "For real-time dashboards"], correct: 1, explanation: "If you need to process the complete output (validate it, store it, pass it to another system), streaming adds complexity without benefit. Use Runner.run() for batch/background tasks." },
   { question: "What event type carries individual text tokens?", options: ["AgentUpdatedStreamEvent", "RunItemStreamEvent", "RawResponsesStreamEvent", "TokenStreamEvent"], correct: 2, explanation: "RawResponsesStreamEvent carries individual tokens as the LLM generates them. Access via event.data.delta.text. This is what you print character-by-character to create the typing effect." },
 ]} />
+
+<LessonComplete lessonId="module-2/streaming-responses" />

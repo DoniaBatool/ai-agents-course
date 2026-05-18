@@ -4,6 +4,7 @@ sidebar_position: 4
 
 import FlashCardDeck from '@site/src/components/FlashCard';
 import Quiz from '@site/src/components/Quiz';
+import LessonComplete from '@site/src/components/LessonComplete';
 
 # Types of AI Agents
 
@@ -309,3 +310,5 @@ Most real-world production agents are **hybrid** — they combine traits from mu
   { question: "What capability distinguishes a Goal-Based agent from a Model-Based agent?", options: ["Goal-Based agents have no memory", "Goal-Based agents plan and take multi-step actions toward objectives", "Goal-Based agents are simpler", "Goal-Based agents can't use tools"], correct: 1, explanation: "Model-Based agents track world state but don't plan sequences of actions. Goal-Based agents actively reason about what steps to take to achieve a specific goal — that's the key difference." },
   { question: "In the OpenAI Agents SDK, which parameter defines the agent's goal and behavior?", options: ["model", "tools", "instructions", "name"], correct: 2, explanation: "The 'instructions' parameter is the system prompt that defines what goal the agent is working toward, how it should behave, what rules to follow, and what format to use for its outputs." },
 ]} />
+
+<LessonComplete lessonId="module-1/types-of-agents" />

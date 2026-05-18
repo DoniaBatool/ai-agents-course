@@ -4,6 +4,7 @@ sidebar_position: 5
 
 import FlashCardDeck from '@site/src/components/FlashCard';
 import Quiz from '@site/src/components/Quiz';
+import LessonComplete from '@site/src/components/LessonComplete';
 
 # Publishing to ChatGPT Apps Store
 
@@ -649,3 +650,5 @@ Now that you know how to build ChatGPT Apps, here are ideas you could build comb
     explanation: "ChatGPT can't reach localhost — it runs in OpenAI's cloud. ngrok creates a public URL (e.g. https://abc123.ngrok.app/mcp) that tunnels to your local port 8787, letting ChatGPT call your MCP server during development."
   },
 ]} />
+
+<LessonComplete lessonId="module-4/chatgpt-apps-sdk" />

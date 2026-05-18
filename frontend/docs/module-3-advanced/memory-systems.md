@@ -4,6 +4,7 @@ sidebar_position: 2
 
 import FlashCardDeck from '@site/src/components/FlashCard';
 import Quiz from '@site/src/components/Quiz';
+import LessonComplete from '@site/src/components/LessonComplete';
 
 # Memory Systems
 
@@ -351,3 +352,5 @@ User Message
   { question: "Why pass the full conversation history to Runner.run()?", options: ["To make the API call cheaper", "So the agent remembers previous messages in the conversation", "It's required by the API", "To enable parallel tool execution"], correct: 1, explanation: "By default each Runner.run() call is stateless. Passing the full history list makes the agent aware of everything said earlier in the conversation." },
   { question: "What happens if you don't trim conversation history in a 200-turn session?", options: ["Nothing — the SDK handles it automatically", "The history may exceed the 128K context window, causing an API error", "Old messages are automatically summarized", "The agent slows down linearly"], correct: 1, explanation: "Each message adds tokens. A 200-turn conversation with tool calls can easily exceed 128K tokens. Always trim or summarize older messages to stay within the context window." },
 ]} />
+
+<LessonComplete lessonId="module-3/memory-systems" />

@@ -4,6 +4,7 @@ sidebar_position: 2
 
 import FlashCardDeck from '@site/src/components/FlashCard';
 import Quiz from '@site/src/components/Quiz';
+import LessonComplete from '@site/src/components/LessonComplete';
 
 # Building Your First Agent
 
@@ -478,3 +479,5 @@ senior_agent = base_agent.clone(
   { question: "What does result.final_output contain?", options: ["Raw API response JSON", "The last tool call result", "The agent's final text answer after all tool calls", "The total token count"], correct: 2, explanation: "final_output is the completed answer — after all reasoning and tool-calling loops, this is the text the agent decided to return to the user." },
   { question: "What happens if your @function_tool has no docstring?", options: ["The SDK raises an error", "The tool still works fine", "The LLM has no description and may not know when or how to use the tool correctly", "The function is ignored"], correct: 2, explanation: "Without a docstring, the LLM has no description of what the tool does. It may call it incorrectly, not call it when it should, or call the wrong tool. Always write descriptive docstrings." },
 ]} />
+
+<LessonComplete lessonId="module-2/first-agent" />

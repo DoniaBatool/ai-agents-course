@@ -4,6 +4,7 @@ sidebar_position: 1
 
 import FlashCardDeck from '@site/src/components/FlashCard';
 import Quiz from '@site/src/components/Quiz';
+import LessonComplete from '@site/src/components/LessonComplete';
 
 # Multi-Agent Patterns
 
@@ -484,3 +485,5 @@ You can also **combine** the two: a triage agent hands off to a specialist, and 
   { question: "What is the main benefit of input guardrails?", options: ["They make responses faster", "They block harmful, off-topic or malicious inputs before reaching the main agent", "They reduce API costs", "They improve response formatting"], correct: 1, explanation: "Guardrails are a safety layer that runs before your main agent. They can block jailbreaks, harmful content, off-topic requests, or invalid inputs — essential for production." },
   { question: "When is a Sequential Pipeline better than Parallel agents?", options: ["When you want speed", "When each stage needs the previous stage's output as input", "When you have a budget constraint", "Always"], correct: 1, explanation: "Use sequential pipelines when tasks depend on each other: stage B needs stage A's output. Use parallel when tasks are independent. Forcing parallel on dependent tasks produces wrong results." },
 ]} />
+
+<LessonComplete lessonId="module-3/multi-agent-patterns" />

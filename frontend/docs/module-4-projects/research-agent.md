@@ -4,6 +4,7 @@ sidebar_position: 2
 
 import FlashCardDeck from '@site/src/components/FlashCard';
 import Quiz from '@site/src/components/Quiz';
+import LessonComplete from '@site/src/components/LessonComplete';
 
 # Research Agent
 
@@ -334,3 +335,5 @@ that 60-70% of LLM projects fail to reach production...
   { question: "What is the risk of running a research agent WITHOUT search tools?", options: ["It will be too slow", "It will hallucinate facts from training data — which may be outdated, incorrect, or fabricated", "It costs more tokens", "It won't start"], correct: 1, explanation: "LLMs have training cutoffs and confidently produce false 'facts'. Always ground research agents with real-time search tools to ensure accuracy and currency." },
   { question: "What should the Analysis stage catch before writing?", options: ["Grammar errors", "Contradictions between sources, key themes, and gaps in research coverage", "Token overuse", "Wrong model selection"], correct: 1, explanation: "Different search results may contradict each other. The analyst identifies what's well-supported, what conflicts, and what's missing — preventing the writer from presenting contradictory info as fact." },
 ]} />
+
+<LessonComplete lessonId="module-4/research-agent" />

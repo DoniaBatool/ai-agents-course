@@ -4,6 +4,7 @@ sidebar_position: 4
 
 import FlashCardDeck from '@site/src/components/FlashCard';
 import Quiz from '@site/src/components/Quiz';
+import LessonComplete from '@site/src/components/LessonComplete';
 
 
 # Production Best Practices
@@ -701,3 +702,5 @@ async def safe_agent_run(agent, message: str) -> str:
   { question: "What should your /health endpoint check?", options: ["Only that the FastAPI server started", "All critical dependencies: env vars loaded, OpenAI API reachable, vector DB reachable — return 503 if any fail", "Only the database connection", "The number of requests per second"], correct: 1, explanation: "Cloud Run uses /health to decide if your container is ready for traffic. If it only checks that FastAPI started, Cloud Run will route traffic to a container that can't actually respond — causing errors. Check all dependencies." },
   { question: "Why should you never return raw exception details to users?", options: ["It's bad UX but not a security issue", "It exposes internal details (file paths, library versions, config values) that attackers use to craft targeted exploits — always log internally and return a generic message", "Users would find it useful", "It increases response size"], correct: 1, explanation: "Exception messages often include stack traces with file paths, library versions, and even config values. Attackers use this to target known vulnerabilities. Log the full error internally; return only 'something went wrong, try again.'" },
 ]} />
+
+<LessonComplete lessonId="module-4/production-best-practices" />

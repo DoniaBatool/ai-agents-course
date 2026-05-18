@@ -4,6 +4,7 @@ sidebar_position: 3
 
 import FlashCardDeck from '@site/src/components/FlashCard';
 import Quiz from '@site/src/components/Quiz';
+import LessonComplete from '@site/src/components/LessonComplete';
 
 # Tools and Functions
 
@@ -337,3 +338,5 @@ def send_email(
   { question: "When is it best to use async tools?", options: ["Always, for all tools", "Only for tools that call external APIs, databases, or do file I/O", "Never — agents don't support async", "Only when using gpt-4o"], correct: 1, explanation: "Async tools allow the SDK to execute multiple tool calls concurrently. Use async def for any tool that does I/O: HTTP requests, database queries, file reads." },
   { question: "What is wrong with this docstring: def get_data(id: str) -> dict: \"\"\"Get data.\"\"\"", options: ["It's too long", "It's too vague — the LLM doesn't know what data, when to call it, or what it returns", "Docstrings must be single-line", "The return type is wrong"], correct: 1, explanation: "The docstring is the LLM's only description of the tool. 'Get data' tells it nothing. Write: what it fetches, what id format to use, what the dict contains." },
 ]} />
+
+<LessonComplete lessonId="module-2/tools-and-functions" />

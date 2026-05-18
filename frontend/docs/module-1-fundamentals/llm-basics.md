@@ -4,6 +4,7 @@ sidebar_position: 3
 
 import FlashCardDeck from '@site/src/components/FlashCard';
 import Quiz from '@site/src/components/Quiz';
+import LessonComplete from '@site/src/components/LessonComplete';
 
 # LLM Basics for Agent Builders
 
@@ -237,3 +238,5 @@ If your agent behaves strangely, the system prompt or tool result format is usua
   { question: "Why do LLMs sometimes 'hallucinate' (make things up)?", options: ["They are programmed to lie", "They predict what sounds right statistically, not what is factually true", "Their training data is wrong", "Hallucination only happens with temperature > 1.0"], correct: 1, explanation: "LLMs are prediction machines — they generate the most statistically likely next token. If they don't 'know' something, they still predict something plausible. This is why grounding agents with real data tools (RAG, search) is so important." },
   { question: "What is the main advantage of a detailed, well-structured system prompt?", options: ["It makes the model faster", "It reduces API costs", "It shapes the agent's focus, output format, rules and behavior precisely", "It increases the context window"], correct: 2, explanation: "The system prompt defines everything about your agent's behavior. A detailed prompt with clear rules, output format, and role produces far more reliable and useful agents than a vague one." },
 ]} />
+
+<LessonComplete lessonId="module-1/llm-basics" />

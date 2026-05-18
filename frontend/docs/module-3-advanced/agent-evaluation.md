@@ -4,6 +4,7 @@ sidebar_position: 4
 
 import FlashCardDeck from '@site/src/components/FlashCard';
 import Quiz from '@site/src/components/Quiz';
+import LessonComplete from '@site/src/components/LessonComplete';
 
 # Agent Evaluation
 
@@ -383,3 +384,5 @@ async def regression_test(agent: Agent, test_cases: list[TestCase], version: str
   { question: "Why track tokens in every evaluation run?", options: ["OpenAI requires it", "Tokens directly map to cost — tracking lets you catch when a prompt change causes 3x token usage before it hits production bills", "Tokens indicate quality", "To measure speed"], correct: 1, explanation: "A prompt change that increases average tokens from 300 to 900 will triple your API bill. Catching this in eval prevents cost surprises in production." },
   { question: "What does forbidden_keywords in a test case check for?", options: ["Keywords the agent must use", "Words that must NOT appear in the output — like 'I cannot help', 'I don't know', or hallucinated facts", "Input validation", "Tool names"], correct: 1, explanation: "forbidden_keywords catch undesirable outputs: refusals on questions the agent should answer, hallucinated names/facts, off-topic content, or safety violations." },
 ]} />
+
+<LessonComplete lessonId="module-3/agent-evaluation" />

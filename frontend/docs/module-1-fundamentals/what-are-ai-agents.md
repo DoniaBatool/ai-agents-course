@@ -4,6 +4,7 @@ sidebar_position: 1
 
 import FlashCardDeck from '@site/src/components/FlashCard';
 import Quiz from '@site/src/components/Quiz';
+import LessonComplete from '@site/src/components/LessonComplete';
 
 # What Are AI Agents?
 
@@ -260,3 +261,5 @@ Review the key concepts from this lesson:
     },
   ]}
 />
+
+<LessonComplete lessonId="module-1/what-are-ai-agents" />

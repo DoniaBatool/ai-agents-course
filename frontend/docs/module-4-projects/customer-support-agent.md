@@ -4,6 +4,7 @@ sidebar_position: 1
 
 import FlashCardDeck from '@site/src/components/FlashCard';
 import Quiz from '@site/src/components/Quiz';
+import LessonComplete from '@site/src/components/LessonComplete';
 
 # Customer Support Agent
 
@@ -359,3 +360,5 @@ receive a personal response within 2 hours.
   { question: "What is the right response to an 'angry' sentiment detection?", options: ["Ignore it and answer the question", "Immediately escalate to a human agent before the customer gets more frustrated", "Ask them to calm down", "Offer a discount automatically"], correct: 1, explanation: "Early escalation is better than late escalation. An already-angry customer who has to repeat themselves to a human will be even angrier. Escalate proactively at the first sign of real frustration." },
   { question: "Why should refund tools check the customer's plan?", options: ["Free users get bigger refunds", "Free plan users have no paid invoices — attempting a refund would fail or cause errors", "Pro users can't get refunds", "All plans get the same treatment"], correct: 1, explanation: "Checking the plan before attempting a refund prevents errors and provides a better user experience. Free users should be told they have no paid invoices, not get a confusing error message." },
 ]} />
+
+<LessonComplete lessonId="module-4/customer-support-agent" />

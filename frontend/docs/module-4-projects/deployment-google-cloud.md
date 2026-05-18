@@ -4,6 +4,7 @@ sidebar_position: 3
 
 import FlashCardDeck from '@site/src/components/FlashCard';
 import Quiz from '@site/src/components/Quiz';
+import LessonComplete from '@site/src/components/LessonComplete';
 
 # Deployment on Google Cloud Run
 
@@ -312,3 +313,5 @@ gcloud run services describe rag-api --region us-central1
   { question: "Why set --timeout 300 for an agent API?", options: ["Cloud Run default is 300s", "Agent chains with multiple tool calls can take 2-5 minutes — without this they'd be killed after 60 seconds", "Longer timeouts are cheaper", "It's required for Python"], correct: 1, explanation: "Default timeout is 60 seconds. A research agent doing 5 parallel searches, then analysis, then writing could easily take 2-3 minutes. Set timeout to match your longest expected request." },
   { question: "What happens on a 'cold start' in Cloud Run?", options: ["The database is reset", "A new container instance starts when there are no warm instances — adds ~1-2 second latency to the first request", "The deployment rolls back", "All requests fail"], correct: 1, explanation: "Cold start happens when min-instances=0 and no instances are running. Cloud Run starts a new container which takes 1-3 seconds. Use min-instances=1 to keep one warm instance if latency is critical." },
 ]} />
+
+<LessonComplete lessonId="module-4/deployment-google-cloud" />

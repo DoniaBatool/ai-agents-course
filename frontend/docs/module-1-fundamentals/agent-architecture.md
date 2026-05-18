@@ -4,6 +4,7 @@ sidebar_position: 2
 
 import FlashCardDeck from '@site/src/components/FlashCard';
 import Quiz from '@site/src/components/Quiz';
+import LessonComplete from '@site/src/components/LessonComplete';
 
 
 # Agent Architecture
@@ -113,3 +114,5 @@ graph LR
   { question: "What is the purpose of Semantic Memory (RAG)?", options: ["Store the user's login credentials", "Cache LLM responses for speed", "Search a vector database to give the agent domain-specific knowledge", "Log errors to a database"], correct: 2, explanation: "RAG (Retrieval-Augmented Generation) lets agents search a vector DB like Qdrant to find relevant knowledge before answering — making answers accurate and grounded." },
   { question: "What happens after a tool returns its result in the agentic loop?", options: ["The loop ends", "The result is discarded", "The result is added to context and the LLM reasons again", "A new agent is created"], correct: 2, explanation: "Tool results flow back into the conversation context. The LLM then reads them in the next reasoning step — this is what makes the loop work." },
 ]} />
+
+<LessonComplete lessonId="module-1/agent-architecture" />

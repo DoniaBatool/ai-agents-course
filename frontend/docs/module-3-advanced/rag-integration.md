@@ -4,6 +4,7 @@ sidebar_position: 3
 
 import FlashCardDeck from '@site/src/components/FlashCard';
 import Quiz from '@site/src/components/Quiz';
+import LessonComplete from '@site/src/components/LessonComplete';
 
 
 # RAG Integration with Qdrant
@@ -159,3 +160,5 @@ def search_knowledge_base(query: str) -> str:
   { question: "What model converts text to vectors for storage in Qdrant?", options: ["gpt-4o-mini", "whisper-1", "text-embedding-3-small", "dall-e-3"], correct: 2, explanation: "text-embedding-3-small converts text to 1536-dimensional semantic vectors. These vectors represent meaning — similar texts get similar vectors." },
   { question: "What is 'chunking overlap' and why does it matter?", options: ["It means chunks share some text at their boundaries, preserving context that would otherwise be cut off", "It makes chunks larger", "It's a bug in the ingestion process", "Overlap reduces storage costs"], correct: 0, explanation: "If a sentence spans two chunks, each chunk gets part of it. Overlap (e.g., last 100 chars of chunk N = first 100 chars of chunk N+1) ensures no context is lost at boundaries." },
 ]} />
+
+<LessonComplete lessonId="module-3/rag-integration" />

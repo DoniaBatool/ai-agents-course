@@ -4,6 +4,7 @@ sidebar_position: 1
 
 import FlashCardDeck from '@site/src/components/FlashCard';
 import Quiz from '@site/src/components/Quiz';
+import LessonComplete from '@site/src/components/LessonComplete';
 
 # Setting Up Your Environment
 
@@ -267,3 +268,5 @@ pip install -r requirements.txt
   { question: "What error means your virtual environment isn't activated?", options: ["AuthenticationError", "ModuleNotFoundError: No module named 'agents'", "RateLimitError", "SyntaxError"], correct: 1, explanation: "If the agents module isn't found, Python is looking in the wrong place — your venv isn't active. Run: source venv/bin/activate" },
   { question: "Why does the OpenAI Agents SDK require Python 3.11+?", options: ["OpenAI only supports 3.11", "It uses asyncio.TaskGroup and modern type hints only available in 3.11+", "Python 3.10 is deprecated", "Virtual environments need 3.11"], correct: 1, explanation: "The SDK uses asyncio.TaskGroup (3.11 feature) for concurrent tool execution, and modern Python type hints for the function_tool decorator's schema generation." },
 ]} />
+
+<LessonComplete lessonId="module-2/setup-environment" />
