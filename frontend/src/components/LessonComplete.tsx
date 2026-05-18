@@ -27,7 +27,8 @@ export default function LessonComplete({ lessonId }: Props) {
     try {
       const token = localStorage.getItem("ai_course_token") ?? "";
       const res = await fetch(`${AUTH_URL}/api/progress`, {
-        method:  "POST",
+        method:      "POST",
+        credentials: "include",
         headers: {
           "Content-Type":  "application/json",
           "Authorization": `Bearer ${token}`,

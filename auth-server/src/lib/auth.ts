@@ -17,4 +17,15 @@ export const auth = betterAuth({
       goal:            { type: "string", required: false },
     },
   },
+  advanced: {
+    crossSubDomainCookies: { enabled: false },
+    cookies: {
+      session_token: {
+        attributes: {
+          sameSite: "none" as const,
+          secure:   true,
+        },
+      },
+    },
+  },
 });

@@ -3,24 +3,32 @@ import { db } from "@/lib/db";
 import { user, userProgress, session } from "@/lib/db/schema";
 import { eq, count } from "drizzle-orm";
 import { sendCertificateEmail } from "@/lib/email";
+import { auth } from "@/lib/auth";
 
 const FRONTEND_ORIGIN = process.env.NEXT_PUBLIC_FRONTEND_URL ?? "http://localhost:3000";
 
-// Verify Bearer token against DB sessions table → returns userId or null
-async function getUserIdFromToken(req: NextRequest): Promise<string | null> {
+// Try Bearer token first, then fall back to cookie session
+async function getUserId(req: NextRequest): Promise<string | null> {
+  // 1. Bearer token (cross-origin requests from frontend)
   const authHeader = req.headers.get("Authorization") ?? "";
-  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7).trim() : null;
-  if (!token) return null;
+  if (authHeader.startsWith("Bearer ")) {
+    const token = authHeader.slice(7).trim();
+    if (token) {
+      const [row] = await db
+        .select({ userId: session.userId, expiresAt: session.expiresAt })
+        .from(session)
+        .where(eq(session.token, token));
+      if (row && new Date(row.expiresAt) >= new Date()) return row.userId;
+    }
+  }
 
-  const [row] = await db
-    .select({ userId: session.userId, expiresAt: session.expiresAt })
-    .from(session)
-    .where(eq(session.token, token));
+  // 2. Cookie session (same-origin or SameSite=None)
+  try {
+    const s = await auth.api.getSession({ headers: req.headers });
+    if (s?.user?.id) return s.user.id;
+  } catch {}
 
-  if (!row) return null;
-  if (new Date(row.expiresAt) < new Date()) return null; // expired
-
-  return row.userId;
+  return null;
 }
 
 function corsHeaders() {
@@ -45,7 +53,7 @@ const TOTAL_LESSONS = 17;
 // Called from frontend when student clicks "Mark as Complete" on a lesson
 // Body: { lessonId: "module-1/lesson-1" }
 export async function POST(req: NextRequest) {
-  const userId = await getUserIdFromToken(req);
+  const userId = await getUserId(req);
   if (!userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401, headers: corsHeaders() });
   }
@@ -124,7 +132,7 @@ export async function POST(req: NextRequest) {
 // ── GET /api/progress ──────────────────────────────────────────────────────────
 // Returns user's completed lesson IDs + overall progress
 export async function GET(req: NextRequest) {
-  const userId = await getUserIdFromToken(req);
+  const userId = await getUserId(req);
   if (!userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401, headers: corsHeaders() });
   }
