@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
   const signature = req.headers.get("paddle-signature") ?? "";
 
   try {
-    const event = paddle.webhooks.unmarshal(
+    const event = await paddle.webhooks.unmarshal(
       body,
       process.env.PADDLE_WEBHOOK_SECRET!,
       signature,
