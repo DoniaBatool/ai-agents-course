@@ -33,8 +33,8 @@ export default function LessonComplete({ lessonId }: Props) {
       });
 
       if (res.status === 401) {
-        // Not logged in — redirect to signup
-        window.location.href = `${AUTH_URL}/signup`;
+        // Not logged in — redirect to login
+        window.location.href = `${AUTH_URL}/login?redirect=${encodeURIComponent(window.location.href)}`;
         return;
       }
 

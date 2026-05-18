@@ -2,8 +2,24 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { user, userProgress } from "@/lib/db/schema";
-import { eq, count, and } from "drizzle-orm";
+import { eq, count } from "drizzle-orm";
 import { sendCertificateEmail } from "@/lib/email";
+
+const FRONTEND_ORIGIN = process.env.NEXT_PUBLIC_FRONTEND_URL ?? "http://localhost:3000";
+
+function corsHeaders() {
+  return {
+    "Access-Control-Allow-Origin":      FRONTEND_ORIGIN,
+    "Access-Control-Allow-Methods":     "GET, POST, OPTIONS",
+    "Access-Control-Allow-Headers":     "Content-Type, Authorization",
+    "Access-Control-Allow-Credentials": "true",
+  };
+}
+
+// Handle CORS preflight
+export async function OPTIONS() {
+  return new NextResponse(null, { status: 204, headers: corsHeaders() });
+}
 
 // Total lessons across all 4 modules
 // Module 1: 4, Module 2: 4, Module 3: 4, Module 4: 5 = 17 total
@@ -16,14 +32,14 @@ export async function POST(req: NextRequest) {
   // Verify session
   const session = await auth.api.getSession({ headers: req.headers });
   if (!session?.user) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401, headers: corsHeaders() });
   }
 
   const body = await req.json().catch(() => ({}));
   const { lessonId } = body as { lessonId?: string };
 
   if (!lessonId) {
-    return NextResponse.json({ error: "lessonId is required" }, { status: 400 });
+    return NextResponse.json({ error: "lessonId is required" }, { status: 400, headers: corsHeaders() });
   }
 
   const userId = session.user.id;
@@ -81,7 +97,7 @@ export async function POST(req: NextRequest) {
         certLink,
         totalLessons: TOTAL_LESSONS,
         completedCount,
-      });
+      }, { headers: corsHeaders() });
     }
   }
 
@@ -89,7 +105,7 @@ export async function POST(req: NextRequest) {
     completed:    courseComplete,
     totalLessons: TOTAL_LESSONS,
     completedCount,
-  });
+  }, { headers: corsHeaders() });
 }
 
 // ── GET /api/progress ──────────────────────────────────────────────────────────
@@ -97,7 +113,7 @@ export async function POST(req: NextRequest) {
 export async function GET(req: NextRequest) {
   const session = await auth.api.getSession({ headers: req.headers });
   if (!session?.user) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401, headers: corsHeaders() });
   }
 
   const userId = session.user.id;
@@ -116,10 +132,10 @@ export async function GET(req: NextRequest) {
 
   return NextResponse.json({
     completedLessonIds,
-    totalLessons:  TOTAL_LESSONS,
+    totalLessons:   TOTAL_LESSONS,
     completedCount: completedLessonIds.length,
     courseComplete: completedLessonIds.length >= TOTAL_LESSONS,
     certificateId:  currentUser?.certificateId ?? null,
     completedAt:    currentUser?.completedAt ?? null,
-  });
+  }, { headers: corsHeaders() });
 }
