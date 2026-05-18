@@ -67,9 +67,9 @@ export default function SignupPage() {
         setError(result.error.message ?? "Signup failed.");
         return;
       }
-      // Redirect to frontend with auth=1 so course pages unlock
-      const frontendUrl = process.env.NEXT_PUBLIC_FRONTEND_URL ?? "http://localhost:3000";
-      window.location.href = `${frontendUrl}?auth=1`;
+      // Redirect to Paddle checkout with userId + email so webhook can unlock access
+      const userId = (result.data as any)?.user?.id ?? "";
+      window.location.href = `/checkout?userId=${encodeURIComponent(userId)}&email=${encodeURIComponent(email)}`;
     } catch {
       setError("Something went wrong. Please try again.");
     } finally {

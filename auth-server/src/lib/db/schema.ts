@@ -14,6 +14,10 @@ export const user = pgTable("user", {
   experienceLevel: text("experience_level"),  // beginner | intermediate | advanced
   pythonLevel:     text("python_level"),       // none | basic | intermediate | advanced
   goal:            text("goal"),               // why they're taking the course
+  // Paddle payment fields
+  isPaid:                boolean("is_paid").notNull().default(false),
+  paddleCustomerId:      text("paddle_customer_id"),
+  paddleSubscriptionId:  text("paddle_subscription_id"),
 });
 
 export const session = pgTable("session", {
