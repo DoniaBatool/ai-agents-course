@@ -3,6 +3,7 @@ import { Paddle, EventName } from "@paddle/paddle-node-sdk";
 import { db } from "@/lib/db";
 import { user } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
+import { sendCancellationEmail } from "@/lib/email";
 
 const paddle = new Paddle(process.env.PADDLE_API_KEY!);
 
@@ -35,14 +36,28 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Subscription cancelled → remove course access
+    // Subscription cancelled → remove course access + send goodbye email
     if (event.eventType === EventName.SubscriptionCanceled) {
       const sub = event.data as any;
       if (sub.id) {
+        // Fetch user details before updating
+        const [cancelledUser] = await db
+          .select({ email: user.email, name: user.name })
+          .from(user)
+          .where(eq(user.paddleSubscriptionId, sub.id));
+
         await db
           .update(user)
           .set({ isPaid: false })
           .where(eq(user.paddleSubscriptionId, sub.id));
+
+        // Send cancellation email if we found the user
+        if (cancelledUser) {
+          await sendCancellationEmail({
+            toEmail:     cancelledUser.email,
+            studentName: cancelledUser.name,
+          });
+        }
       }
     }
 
